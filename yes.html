@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yes! 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    h1 {
+      font-size: 3rem;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      position: absolute;
+      top: 20%;
+      text-align: center;
+      animation: pulse 2s infinite;
+    }
+    .heart {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      animation: heartbeat 1.5s infinite;
+      margin-top: 80px;
+    }
+    .heart::before,
+    .heart::after {
+      content: '';
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      border-radius: 50%;
+      position: absolute;
+    }
+    .heart::before {
+      top: -100px;
+      left: 0;
+    }
+    .heart::after {
+      left: 100px;
+      top: 0;
+    }
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: randomColor();
+      animation: fall 3s linear infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(-45deg); }
+      50% { transform: translate(-50%, -50%) scale(1.2) rotate(-45deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100vh) translateX(calc(var(--x-pos) * 1vw)); }
+      100% { transform: translateY(100vh) translateX(calc(var(--x-pos) * 1vw)); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Yes! You Make My Universe Complete! 💖</h1>
+  <div class="heart"></div>
+
+  <script>
+    const colors = ['#fce38a', '#f38181', '#95e1d3', '#a8d8ea', '#aa96da'];
+    
+    function randomColor() {
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    for (let i = 0; i < 100; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.backgroundColor = randomColor();
+      confetti.style.left = `${Math.random() * 100}vw`;
+      confetti.style.setProperty('--x-pos', Math.random() * 100 - 50);
+      confetti.style.animationDelay = `${Math.random() * 3}s`;
+      document.body.appendChild(confetti);
+    }
+  </script>
+</body>
+</html>
